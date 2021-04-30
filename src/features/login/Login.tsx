@@ -8,11 +8,23 @@ const Login: FC<any> = () => {
   const [validPassword, setValidPassword] = useState<boolean>(false)
 
 
-  const changeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
+  const changeEmail = ({target}: ChangeEvent<HTMLInputElement>) => {
+    setValidEmail(false)
+    setEmail(target.value)
   }
+
   const changePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setValidPassword(false)
     setPassword(e.target.value)
+  }
+  const onSubmit = () => {
+    const pattern = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g);
+    if (!pattern.test(email)) {
+      setValidEmail(true)
+    }
+    if (password.length < 6) {
+      setValidPassword(true)
+    }
   }
 
   return (
@@ -29,8 +41,8 @@ const Login: FC<any> = () => {
               <label>Password</label>
             </div>
             {validEmail && <p className="error">Enter valid email</p>}
-            {validPassword && <p className="error">Enter valid password</p>}
-            <input type="submit" value="Submit" disabled={validEmail || validPassword}/>
+            {validPassword && <p className="error">Enter longer password more then 6 symbols</p>}
+            <input type="submit" value="Submit" onClick={onSubmit}/>
           </form>
         </div>
       </div>
