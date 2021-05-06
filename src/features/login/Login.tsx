@@ -1,14 +1,25 @@
-import React, {ChangeEvent, FC, useState} from 'react';
+import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import './Login.scss'
 import Spinner from '../../components/spinner/Spinner';
+import axios from 'axios';
+import {setInterval} from 'timers';
 
 const Login: FC<any> = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [validEmail, setValidEmail] = useState<boolean>(false)
   const [validPassword, setValidPassword] = useState<boolean>(false)
-  const isLoading = true
+  const isLoading = false
 
+
+  useEffect(()=>{
+    const date = Date.now()
+
+    axios.get("http://localhost:7542/2.0/ping/?frontTime="+date.toString()).then(r=>console.log(r)).catch(e=>console.log(e))
+    axios.post("http://localhost:7542/2.0/auth/login/",{email: "nya-admin@nya.nya",password: "1qazxcvBG",
+      rememberMe: false}).then(r=>console.log(r)).catch(e=>console.log(e))
+
+  },[])
   const changeEmail = ({target}: ChangeEvent<HTMLInputElement>) => {
     setValidEmail(false)
     setEmail(target.value)
