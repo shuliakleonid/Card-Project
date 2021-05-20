@@ -3,6 +3,7 @@ import Button from './button/Button';
 import Input from './input/Input';
 import Checkbox from './checkbox/Checkbox';
 import s from './TestPage.module.scss'
+import SearchList from '../main/ui/search/Search-list';
 
 const TestPage = () => {
     return (
@@ -21,7 +22,7 @@ const TestPage = () => {
                 <Checkbox />
             </div>
 
-
+         < SearchList/>
 
         </div>
     );

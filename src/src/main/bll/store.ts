@@ -2,9 +2,11 @@ import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import thunkMiddleware, {ThunkAction} from 'redux-thunk';
 import {authReducer} from './authReducer'
 import {AuthActionsTypes} from './auth-actions';
+import {decksReducer} from "./decks-reducer";
 
 const rootReducer = combineReducers({
   user: authReducer,
+  decks: decksReducer
 })
 
 //@ts-ignore
@@ -18,6 +20,4 @@ export type ThunkType = ThunkAction<void, RootStoreType, unknown, AuthActionsTyp
 
 
 
-// radux-devtuls
-// react-developerTuls
 

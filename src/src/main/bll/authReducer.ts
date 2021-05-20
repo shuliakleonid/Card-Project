@@ -6,7 +6,8 @@ const initialState = {
   avatar: null as string | null,
   isLoading: false,
   isAuth: false,
-  isRegister: false
+  isRegister: false,
+  error: null as string | null,
 }
 
 export type AuthStateType = typeof initialState
@@ -14,16 +15,18 @@ export type AuthStateType = typeof initialState
 export const authReducer = (state: AuthStateType = initialState, action: AuthActionsTypes): AuthStateType => {
   switch (action.type) {
     case AuthEnum.LOGIN:
-      return {...state, ...action.payload}
+      return {...state, ...action.payload, isAuth: true}
     case AuthEnum.LOGOUT:
-      return {...state, name: null, _id: null, avatar: null}
+      return {...state, name: null, _id: null, avatar: null, error: 'logged out', isAuth: false, isRegister: false}
     case AuthEnum.UPDATE_USER:
       return {...state, ...action.payload}
     case AuthEnum.IS_LOADING:
       return {...state, ...action.payload}
     case AuthEnum.IS_AUTH:
-      return {...state, ...action.payload}
+      return {...state, ...action.payload, error: null}
     case AuthEnum.IS_REGISTER:
+      return {...state, ...action.payload}
+    case AuthEnum.ERROR :
       return {...state, ...action.payload}
     default:
       return state
